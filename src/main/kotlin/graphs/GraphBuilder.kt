@@ -55,6 +55,23 @@ class GraphBuilder {
         fun hasEdge(srcNodeID: Int, dstNodeID: Int): Boolean {
             return weightBetween(srcNodeID, dstNodeID) != Float.MAX_VALUE
         }
+
+        fun isDirected(): Boolean {
+            for (i in adjacencyMatrix.indices) {
+                for (j in adjacencyMatrix.indices) {
+                    if (adjacencyMatrix[i][j] != adjacencyMatrix[j][i])
+                        return false
+                }
+            }
+            return true
+        }
+
+        fun isEulerianCyclePossible(): Boolean {
+            for (i in 0 until verticesQuantity()) {
+                if (degreeFrom(i) % 2 != 0) return false
+            }
+            return true
+        }
     }
 
     companion object FileParser {
@@ -89,15 +106,25 @@ class GraphBuilder {
         }
         buildVertices()
 
-        fun buildEdges() {
+        fun buildArcs() {
             for (i in (verticesNumber() + 2)..graphAsList.lastIndex) {
                 val line = graphAsList[i].split(" ")
                 returnable.adjacencyMatrix[line[0].toInt() - 1][line[1].toInt() - 1] = line[2].toFloat()
             }
         }
-        buildEdges()
+        buildArcs()
 
-        fun fillEdgeGaps() {
+        if (graphAsList[verticesNumber() + 1] != "*arcs") {
+            fun buildEdges() {
+                for (i in (verticesNumber() + 2)..graphAsList.lastIndex) {
+                    val line = graphAsList[i].split(" ")
+                    returnable.adjacencyMatrix[line[1].toInt() - 1][line[0].toInt() - 1] = line[2].toFloat()
+                }
+            }
+            buildEdges()
+        }
+
+        fun fillGaps() {
             for (i in returnable.adjacencyMatrix.indices) {
                 for (j in returnable.adjacencyMatrix.indices) {
                     if (returnable.adjacencyMatrix[i][j].toInt() == 0) {
@@ -106,7 +133,7 @@ class GraphBuilder {
                 }
             }
         }
-        fillEdgeGaps()
+        fillGaps()
 
         return returnable
     }
