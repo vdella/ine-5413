@@ -3,9 +3,12 @@ import operations.Operator
 
 fun main() {
     val builder = GraphBuilder()
-    val list = builder.buildGraph("src/main/resources/test.txt")
-    println(list.verticesQuantity())
-    println(list.edgesQuantity())
-    println(list.weightBetween(0, 1))
-    println(Operator.showBFS(2, list))
+    val graphSample = builder.buildGraph("src/main/resources/dolphins.net")
+    println(graphSample.isDirected())
+    println(graphSample.edgesQuantity())
+    println("BREADTH-FIRST SEARCH: ")
+    println(Operator.showBFS(3, graphSample))
+    println()
+    println("DIJKSTRA: ")
+    println(Operator.showDijkstra(3, graphSample))
 }
