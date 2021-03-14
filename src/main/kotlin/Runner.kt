@@ -3,7 +3,7 @@ import operations.Operator
 
 fun main() {
     val builder = GraphBuilder()
-    val graphSample = builder.buildGraph("src/main/resources/dolphins.net")
+    val graphSample = builder.buildGraph("src/main/resources/karate.net")
     println(graphSample.isDirected())
     println(graphSample.edgesQuantity())
     println("BREADTH-FIRST SEARCH: ")
@@ -11,4 +11,5 @@ fun main() {
     println()
     println("DIJKSTRA: ")
     println(Operator.showDijkstra(3, graphSample))
+    println(Operator.showFW(graphSample))
 }
