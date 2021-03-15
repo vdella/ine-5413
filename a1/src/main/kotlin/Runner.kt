@@ -11,5 +11,7 @@ fun main() {
     println()
     println("DIJKSTRA: ")
     println(Operator.showDijkstra(3, graphSample))
+    println()
+    println("FLOYD-WARSHALL: ")
     println(Operator.showFW(graphSample))
 }
