@@ -1,5 +1,7 @@
+import a1.BFS
+import a1.Dijkstra
+import a1.FloydWarshall
 import graphs.GraphBuilder
-import operations.Operator
 
 fun main() {
     val builder = GraphBuilder()
@@ -7,11 +9,11 @@ fun main() {
     println(graphSample.isDirected())
     println(graphSample.edgesQuantity())
     println("BREADTH-FIRST SEARCH: ")
-    println(Operator.showBFS(3, graphSample))
+    println(BFS.show(3, graphSample))
     println()
     println("DIJKSTRA: ")
-    println(Operator.showDijkstra(3, graphSample))
+    println(Dijkstra.show(3, graphSample))
     println()
     println("FLOYD-WARSHALL: ")
-    println(Operator.showFW(graphSample))
+    println(FloydWarshall.show(graphSample))
 }
